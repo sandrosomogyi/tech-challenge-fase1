@@ -1,7 +1,8 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities;
 
 import jakarta.persistence.*;
-import java.util.Date;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "tb_Contratacao")
@@ -13,13 +14,13 @@ public class Contratacao {
     private Vaga vaga;
     private Colaborador colaborador;
     private Candidato candidato;
-    private Date dataInicio;
-    private Date dataFim;
+    private LocalDate dataInicio;
+    private LocalDate dataFim;
     private boolean validado;
 
     // Construtor
     public Contratacao(Long idContratacao, Vaga vaga, Colaborador colaborador, Candidato candidato,
-                       Date dataInicio, Date dataFim, boolean validado) {
+                       LocalDate dataInicio, LocalDate dataFim, boolean validado) {
         this.idContratacao = idContratacao;
         this.vaga = vaga;
         this.colaborador = colaborador;
@@ -58,19 +59,19 @@ public class Contratacao {
         this.candidato = candidato;
     }
 
-    public Date getDataInicio() {
+    public LocalDate getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(Date dataInicio) {
+    public void setDataInicio(LocalDate dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public Date getDataFim() {
+    public LocalDate getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(Date dataFim) {
+    public void setDataFim(LocalDate dataFim) {
         this.dataFim = dataFim;
     }
 

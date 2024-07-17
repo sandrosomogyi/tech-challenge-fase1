@@ -1,0 +1,8 @@
+package br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto;
+
+public record PessoaDTO(
+        String nome,
+        String sobrenome,
+        String telefone,
+        String email) {
+}

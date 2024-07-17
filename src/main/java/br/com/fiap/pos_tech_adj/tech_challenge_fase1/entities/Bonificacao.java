@@ -2,7 +2,7 @@ package br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "tb_Bonificacao")
@@ -15,12 +15,12 @@ public class Bonificacao {
     private Colaborador colaborador;
     private Candidato candidato;
     private Contratacao contratacao;
-    private Date dataBonificacao;
+    private LocalDate dataBonificacao;
     private boolean efetuada;
 
     // Construtor
     public Bonificacao(Long idBonificacao, Vaga vaga, Colaborador colaborador, Candidato candidato,
-                       Contratacao contratacao, Date dataBonificacao, boolean efetuada) {
+                       Contratacao contratacao, LocalDate dataBonificacao, boolean efetuada) {
         this.idBonificacao = idBonificacao;
         this.vaga = vaga;
         this.colaborador = colaborador;
@@ -67,11 +67,11 @@ public class Bonificacao {
         this.contratacao = contratacao;
     }
 
-    public Date getDataBonificacao() {
+    public LocalDate getDataBonificacao() {
         return dataBonificacao;
     }
 
-    public void setDataBonificacao(Date dataBonificacao) {
+    public void setDataBonificacao(LocalDate dataBonificacao) {
         this.dataBonificacao = dataBonificacao;
     }
 
