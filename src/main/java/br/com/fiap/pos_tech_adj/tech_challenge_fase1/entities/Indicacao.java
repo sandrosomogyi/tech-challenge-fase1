@@ -3,7 +3,7 @@ package br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tb_Indicacao")
+@Table(name="tb_Indicacao")
 public class Indicacao {
 
     @Id

@@ -16,12 +16,13 @@ public class Vaga {
     private String beneficios;
     private String tipoContratacao;
     private Double remuneracao;
+    private Double valorBonificacao;
     private String observacoes;
 
     // Construtor
     public Vaga(Long idVaga, String titulo, String descricao, String requisitosObrigatorios,
                 String requisitosDesejaveis, String beneficios, String tipoContratacao,
-                Double remuneracao, String observacoes) {
+                Double remuneracao, Double valorBonificacao, String observacoes) {
         this.idVaga = idVaga;
         this.titulo = titulo;
         this.descricao = descricao;
@@ -30,6 +31,7 @@ public class Vaga {
         this.beneficios = beneficios;
         this.tipoContratacao = tipoContratacao;
         this.remuneracao = remuneracao;
+        this.valorBonificacao = valorBonificacao;
         this.observacoes = observacoes;
     }
 
@@ -92,6 +94,14 @@ public class Vaga {
 
     public void setRemuneracao(Double remuneracao) {
         this.remuneracao = remuneracao;
+    }
+
+    public Double getValorBonificacao() {
+        return valorBonificacao;
+    }
+
+    public void setValorBonificacao(Double valorBonificacao) {
+        this.valorBonificacao = valorBonificacao;
     }
 
     public String getObservacoes() {

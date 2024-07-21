@@ -1,12 +1,19 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities;
 
-public class Pessoa {
+import jakarta.persistence.MappedSuperclass;
+
+@MappedSuperclass
+public abstract class Pessoa {
+
     private String nome;
     private String sobrenome;
     private String telefone;
     private String email;
 
-    // Construtor
+    // Construtores
+    public Pessoa() {
+    }
+
     public Pessoa(String nome, String sobrenome, String telefone, String email) {
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -45,16 +52,5 @@ public class Pessoa {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    // toString para facilitar a visualização
-    @Override
-    public String toString() {
-        return "Pessoa{" +
-                "nome='" + nome + '\'' +
-                ", sobrenome='" + sobrenome + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", email='" + email + '\'' +
-                '}';
     }
 }

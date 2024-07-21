@@ -9,5 +9,6 @@ public record VagaDTO(
         String beneficios,
         String tipoContratacao,
         Double remuneracao,
+        Double valorBonificacao,
         String observacoes) {
 }
