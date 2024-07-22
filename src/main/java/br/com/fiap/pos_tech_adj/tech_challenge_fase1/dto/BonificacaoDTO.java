@@ -15,5 +15,4 @@ public record BonificacaoDTO(
         Contratacao contratacao,
         LocalDate dataBonificacao,
         boolean efetuada) {
-
 }

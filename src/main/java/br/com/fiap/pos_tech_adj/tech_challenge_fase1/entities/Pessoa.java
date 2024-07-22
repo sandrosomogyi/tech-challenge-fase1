@@ -1,27 +1,36 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities;
 
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 
-@MappedSuperclass
-public abstract class Pessoa {
+@Entity
+@Table(name = "tb_Pessoa")
+public class Pessoa {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idPessoa;
 
     private String nome;
     private String sobrenome;
     private String telefone;
     private String email;
 
-    // Construtores
-    public Pessoa() {
+    //Contrutor Padrão
+    public Pessoa(){
     }
 
-    public Pessoa(String nome, String sobrenome, String telefone, String email) {
+    public Pessoa(Long idPessoa, String nome, String sobrenome, String telefone, String email) {
+        this.idPessoa = idPessoa;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.telefone = telefone;
         this.email = email;
     }
 
-    // Getters e Setters
+    public Long getIdPessoa() {
+        return idPessoa;
+    }
+
     public String getNome() {
         return nome;
     }

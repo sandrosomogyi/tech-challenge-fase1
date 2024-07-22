@@ -9,14 +9,25 @@ public class Indicacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idIndicacao;
+
+    @OneToOne
+    @JoinColumn(name = "idVaga")
     private Vaga vaga;
+
+    @OneToOne
+    @JoinColumn(name = "idColaborador")
     private Colaborador colaborador;
+
     private String telefoneCandidato;
     private String emailCandidato;
     private String curriculoCandidato;
     private String perfilCandidato;
     private String observacoes;
     private boolean validado;
+
+    //Contrutor Padrão
+    public Indicacao(){
+    }
 
     // Construtor
     public Indicacao(Long idIndicacao, Vaga vaga, Colaborador colaborador, String telefoneCandidato,

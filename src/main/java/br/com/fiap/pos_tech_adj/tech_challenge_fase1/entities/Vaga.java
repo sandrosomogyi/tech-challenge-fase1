@@ -19,6 +19,10 @@ public class Vaga {
     private Double valorBonificacao;
     private String observacoes;
 
+    //Contrutor Padrão
+    public Vaga(){
+    }
+
     // Construtor
     public Vaga(Long idVaga, String titulo, String descricao, String requisitosObrigatorios,
                 String requisitosDesejaveis, String beneficios, String tipoContratacao,

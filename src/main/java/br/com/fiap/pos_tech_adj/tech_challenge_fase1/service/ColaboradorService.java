@@ -1,7 +1,6 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.service;
 
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.ColaboradorDTO;
-import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.PessoaDTO;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities.Colaborador;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.repository.ColaboradorRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -38,12 +37,10 @@ public class ColaboradorService {
 
     public ColaboradorDTO update(Long id, ColaboradorDTO colaboradorDTO){
         try{
+
             Colaborador colaborador = colaboradorRepository.getReferenceById(id);
 
-            colaborador.setNome(colaboradorDTO.pessoaDTO().nome());
-            colaborador.setSobrenome(colaboradorDTO.pessoaDTO().sobrenome());
-            colaborador.setTelefone(colaboradorDTO.pessoaDTO().telefone());
-            colaborador.setEmail(colaboradorDTO.pessoaDTO().email());
+            colaborador.setPessoa(colaboradorDTO.pessoa());
 
             colaborador = colaboradorRepository.save(colaborador);
             return toDTO(colaborador);
@@ -58,26 +55,16 @@ public class ColaboradorService {
     }
 
     private ColaboradorDTO toDTO(Colaborador colaborador) {
-        PessoaDTO pessoaDTO = new PessoaDTO(
-                colaborador.getNome(),
-                colaborador.getSobrenome(),
-                colaborador.getTelefone(),
-                colaborador.getEmail()
-        );
-
         return new ColaboradorDTO(
                 colaborador.getIdColaborador(),
-                pessoaDTO
+                colaborador.getPessoa()
         );
     }
 
     private Colaborador toEntity(ColaboradorDTO colaboradorDTO) {
         return new Colaborador(
                 colaboradorDTO.idColaborador(),
-                colaboradorDTO.pessoaDTO().nome(),
-                colaboradorDTO.pessoaDTO().sobrenome(),
-                colaboradorDTO.pessoaDTO().telefone(),
-                colaboradorDTO.pessoaDTO().email()
+                colaboradorDTO.pessoa()
         );
     }
 }

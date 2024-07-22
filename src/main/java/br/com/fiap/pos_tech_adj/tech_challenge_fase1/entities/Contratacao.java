@@ -11,12 +11,26 @@ public class Contratacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idContratacao;
+
+    @OneToOne
+    @JoinColumn(name = "idVaga")
     private Vaga vaga;
+
+    @OneToOne
+    @JoinColumn(name = "idColaborador")
     private Colaborador colaborador;
+
+    @OneToOne
+    @JoinColumn(name = "idCandidato")
     private Candidato candidato;
+
     private LocalDate dataInicio;
     private LocalDate dataFim;
     private boolean validado;
+
+    //Contrutor Padrão
+    public Contratacao(){
+    }
 
     // Construtor
     public Contratacao(Long idContratacao, Vaga vaga, Colaborador colaborador, Candidato candidato,

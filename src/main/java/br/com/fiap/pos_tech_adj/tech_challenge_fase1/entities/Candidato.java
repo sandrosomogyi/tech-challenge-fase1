@@ -1,29 +1,30 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_Candidato")
-public class Candidato extends Pessoa {
+public class Candidato {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCandidato;
+
+    @OneToOne
+    @JoinColumn(name = "idPessoa")
+    private Pessoa pessoa;
+
     private String perfilLinkedin;
     private String curriculo;
 
-    // Construtor padrão
-    public Candidato() {
+    //Contrutor Padrão
+    public Candidato(){
     }
 
     // Construtor
-    public Candidato(Long idCandidato, String nome, String sobrenome, String telefone, String email, String perfilLinkedin, String curriculo) {
-        super(nome, sobrenome, telefone, email);
+    public Candidato(Long idCandidato, Pessoa pessoa, String perfilLinkedin, String curriculo) {
         this.idCandidato = idCandidato;
+        this.pessoa = pessoa;
         this.perfilLinkedin = perfilLinkedin;
         this.curriculo = curriculo;
     }
@@ -33,8 +34,12 @@ public class Candidato extends Pessoa {
         return idCandidato;
     }
 
-    public void setIdCandidato(Long idCandidato) {
-        this.idCandidato = idCandidato;
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
     public String getPerfilLinkedin() {
@@ -57,10 +62,10 @@ public class Candidato extends Pessoa {
     public String toString() {
         return "Candidato{" +
                 "idCandidato=" + idCandidato +
-                ", nome='" + getNome() + '\'' +
-                ", sobrenome='" + getSobrenome() + '\'' +
-                ", telefone='" + getTelefone() + '\'' +
-                ", email='" + getEmail() + '\'' +
+                ", nome='" + pessoa.getNome() + '\'' +
+                ", sobrenome='" + pessoa.getSobrenome() + '\'' +
+                ", telefone='" + pessoa.getTelefone() + '\'' +
+                ", email='" + pessoa.getEmail() + '\'' +
                 ", perfilLinkedin='" + perfilLinkedin + '\'' +
                 ", curriculo='" + curriculo + '\'' +
                 '}';

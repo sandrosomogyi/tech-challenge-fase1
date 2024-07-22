@@ -11,12 +11,29 @@ public class Bonificacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idBonificacao;
+
+    @OneToOne
+    @JoinColumn(name = "idVaga")
     private Vaga vaga;
+
+    @OneToOne
+    @JoinColumn(name = "idColaborador")
     private Colaborador colaborador;
+
+    @OneToOne
+    @JoinColumn(name = "idCandidato")
     private Candidato candidato;
+
+    @OneToOne
+    @JoinColumn(name = "idContratacao")
     private Contratacao contratacao;
+
     private LocalDate dataBonificacao;
     private boolean efetuada;
+
+    //Contrutor Padrão
+    public Bonificacao(){
+    }
 
     // Construtor
     public Bonificacao(Long idBonificacao, Vaga vaga, Colaborador colaborador, Candidato candidato,

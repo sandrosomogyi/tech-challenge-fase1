@@ -40,10 +40,7 @@ public class CandidatoService {
         try{
             Candidato candidato = candidatoRepository.getReferenceById(id);
 
-            candidato.setNome(candidatoDTO.pessoaDTO().nome());
-            candidato.setSobrenome(candidatoDTO.pessoaDTO().sobrenome());
-            candidato.setTelefone(candidatoDTO.pessoaDTO().telefone());
-            candidato.setEmail(candidatoDTO.pessoaDTO().email());
+            candidato.setPessoa(candidatoDTO.pessoa());
             candidato.setPerfilLinkedin(candidatoDTO.perfilLinkedin());
             candidato.setCurriculo(candidatoDTO.curriculo());
 
@@ -60,16 +57,9 @@ public class CandidatoService {
     }
 
     private CandidatoDTO toDTO(Candidato candidato) {
-        PessoaDTO pessoaDTO = new PessoaDTO(
-                candidato.getNome(),
-                candidato.getSobrenome(),
-                candidato.getTelefone(),
-                candidato.getEmail()
-        );
-
         return new CandidatoDTO(
                 candidato.getIdCandidato(),
-                pessoaDTO,
+                candidato.getPessoa(),
                 candidato.getPerfilLinkedin(),
                 candidato.getCurriculo()
         );
@@ -78,10 +68,7 @@ public class CandidatoService {
     private Candidato toEntity(CandidatoDTO candidatoDTO) {
         return new Candidato(
                 candidatoDTO.idCandidato(),
-                candidatoDTO.pessoaDTO().nome(),
-                candidatoDTO.pessoaDTO().sobrenome(),
-                candidatoDTO.pessoaDTO().telefone(),
-                candidatoDTO.pessoaDTO().email(),
+                candidatoDTO.pessoa(),
                 candidatoDTO.perfilLinkedin(),
                 candidatoDTO.curriculo()
         );
