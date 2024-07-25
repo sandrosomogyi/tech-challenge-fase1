@@ -1,5 +1,6 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.service;
 
+import br.com.fiap.pos_tech_adj.tech_challenge_fase1.controller.exception.ControllerNotFoundException;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.VagaDTO;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities.Vaga;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.repository.VagaRepository;
@@ -26,7 +27,7 @@ public class VagaService {
 
     public VagaDTO findById(Long id){
         Vaga vaga = vagaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Vaga não Encontrada"));
+                .orElseThrow(() -> new ControllerNotFoundException("Vaga não encontrada"));
         return toDTO(vaga);
     }
 
@@ -53,7 +54,7 @@ public class VagaService {
             return toDTO(vaga);
         }
         catch (EntityNotFoundException e){
-            throw new RuntimeException("Vaga não Encontrada");
+            throw new ControllerNotFoundException("Vaga não encontrada");
         }
     }
 

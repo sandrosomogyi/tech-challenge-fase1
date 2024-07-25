@@ -1,5 +1,6 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.service;
 
+import br.com.fiap.pos_tech_adj.tech_challenge_fase1.controller.exception.ControllerNotFoundException;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.BonificacaoDTO;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities.Bonificacao;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.repository.BonificacaoRepository;
@@ -26,7 +27,7 @@ public class BonificacaoService {
 
     public BonificacaoDTO findById(Long id){
         Bonificacao bonificacao = bonificacaoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Bonificação não Encontrada"));
+                .orElseThrow(() -> new ControllerNotFoundException("Bonificação não encontrada"));
         return toDTO(bonificacao);
     }
 
@@ -50,7 +51,7 @@ public class BonificacaoService {
             return toDTO(bonificacao);
         }
         catch (EntityNotFoundException e){
-            throw new RuntimeException("Bonificação não Encontrada");
+            throw new ControllerNotFoundException("Bonificação não encontrada");
         }
     }
 

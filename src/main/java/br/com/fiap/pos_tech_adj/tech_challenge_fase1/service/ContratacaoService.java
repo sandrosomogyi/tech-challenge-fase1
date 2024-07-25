@@ -1,5 +1,6 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.service;
 
+import br.com.fiap.pos_tech_adj.tech_challenge_fase1.controller.exception.ControllerNotFoundException;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.ContratacaoDTO;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities.Contratacao;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.repository.ContratacaoRepository;
@@ -26,7 +27,7 @@ public class ContratacaoService {
 
     public ContratacaoDTO findById(Long id){
         Contratacao contratacao = contratacaoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Contratação não Encontrada"));
+                .orElseThrow(() -> new ControllerNotFoundException("Contratação não encontrada"));
         return toDTO(contratacao);
     }
 
@@ -50,7 +51,7 @@ public class ContratacaoService {
             return toDTO(contratacao);
         }
         catch (EntityNotFoundException e){
-            throw new RuntimeException("Contratação não Encontrada");
+            throw new ControllerNotFoundException("Contratação não encontrada");
         }
     }
 

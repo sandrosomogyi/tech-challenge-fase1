@@ -1,5 +1,6 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.service;
 
+import br.com.fiap.pos_tech_adj.tech_challenge_fase1.controller.exception.ControllerNotFoundException;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.CandidatoDTO;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.PessoaDTO;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities.Candidato;
@@ -27,7 +28,7 @@ public class CandidatoService {
 
     public CandidatoDTO findById(Long id){
         Candidato candidato = candidatoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Candidato não Encontrado"));
+                .orElseThrow(() -> new ControllerNotFoundException("Candidato não encontrado"));
         return toDTO(candidato);
     }
 
@@ -48,7 +49,7 @@ public class CandidatoService {
             return toDTO(candidato);
         }
         catch (EntityNotFoundException e){
-            throw new RuntimeException("Candidato não Encontrado");
+            throw new ControllerNotFoundException("Candidato não encontrado");
         }
     }
 

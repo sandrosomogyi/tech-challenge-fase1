@@ -1,5 +1,6 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.service;
 
+import br.com.fiap.pos_tech_adj.tech_challenge_fase1.controller.exception.ControllerNotFoundException;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.IndicacaoDTO;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities.Indicacao;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.repository.IndicacaoRepository;
@@ -26,7 +27,7 @@ public class IndicacaoService {
 
     public IndicacaoDTO findById(Long id){
         Indicacao indicacao = indicacaoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Indicação não Encontrada"));
+                .orElseThrow(() -> new ControllerNotFoundException("Indicação não encontrada"));
         return toDTO(indicacao);
     }
 
@@ -52,7 +53,7 @@ public class IndicacaoService {
             return toDTO(indicacao);
         }
         catch (EntityNotFoundException e){
-            throw new RuntimeException("Indicação não Encontrada");
+            throw new ControllerNotFoundException("Indicação não encontrada");
         }
     }
 

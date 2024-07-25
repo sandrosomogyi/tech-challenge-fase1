@@ -1,5 +1,6 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.service;
 
+import br.com.fiap.pos_tech_adj.tech_challenge_fase1.controller.exception.ControllerNotFoundException;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.ColaboradorDTO;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities.Colaborador;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.repository.ColaboradorRepository;
@@ -26,7 +27,7 @@ public class ColaboradorService {
 
     public ColaboradorDTO findById(Long id){
         Colaborador colaborador = colaboradorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Colaborador não Encontrado"));
+                .orElseThrow(() -> new ControllerNotFoundException("Colaborador não encontrado"));
         return toDTO(colaborador);
     }
 
@@ -46,7 +47,7 @@ public class ColaboradorService {
             return toDTO(colaborador);
         }
         catch (EntityNotFoundException e){
-            throw new RuntimeException("Colaborador não Encontrado");
+            throw new ControllerNotFoundException("Colaborador não encontrado");
         }
     }
 
