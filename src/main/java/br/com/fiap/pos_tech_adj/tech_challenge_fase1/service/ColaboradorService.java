@@ -16,48 +16,52 @@ public class ColaboradorService {
     private final ColaboradorRepository colaboradorRepository;
 
     @Autowired
-    public ColaboradorService (ColaboradorRepository colaboradorRepository){
+    public ColaboradorService(ColaboradorRepository colaboradorRepository) {
         this.colaboradorRepository = colaboradorRepository;
     }
 
-    public Page<ColaboradorDTO> findAll (Pageable pageable){
+    public Page<ColaboradorDTO> findAll(Pageable pageable) {
         Page<Colaborador> colaboradores = colaboradorRepository.findAll(pageable);
         return colaboradores.map(this::toDTO);
     }
 
-    public ColaboradorDTO findById(Long id){
+    public ColaboradorDTO findById(Long id) {
         Colaborador colaborador = colaboradorRepository.findById(id)
                 .orElseThrow(() -> new ControllerNotFoundException("Colaborador não encontrado"));
         return toDTO(colaborador);
     }
 
-    public ColaboradorDTO save(ColaboradorDTO colaboradorDTO){
+    public ColaboradorDTO save(ColaboradorDTO colaboradorDTO) {
         Colaborador colaborador = colaboradorRepository.save(toEntity(colaboradorDTO));
         return toDTO(colaborador);
     }
 
-    public ColaboradorDTO update(Long id, ColaboradorDTO colaboradorDTO){
-        try{
-
+    public ColaboradorDTO update(Long id, ColaboradorDTO colaboradorDTO) {
+        try {
             Colaborador colaborador = colaboradorRepository.getReferenceById(id);
 
+            colaborador.setDepartamento(colaboradorDTO.departamento());
+            colaborador.setCargo(colaboradorDTO.cargo());
+            colaborador.setDataContratacao(colaboradorDTO.dataContratacao());
             colaborador.setPessoa(colaboradorDTO.pessoa());
 
             colaborador = colaboradorRepository.save(colaborador);
             return toDTO(colaborador);
-        }
-        catch (EntityNotFoundException e){
+        } catch (EntityNotFoundException e) {
             throw new ControllerNotFoundException("Colaborador não encontrado");
         }
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         colaboradorRepository.deleteById(id);
     }
 
     private ColaboradorDTO toDTO(Colaborador colaborador) {
         return new ColaboradorDTO(
                 colaborador.getIdColaborador(),
+                colaborador.getDepartamento(),
+                colaborador.getCargo(),
+                colaborador.getDataContratacao(),
                 colaborador.getPessoa()
         );
     }
@@ -65,6 +69,9 @@ public class ColaboradorService {
     private Colaborador toEntity(ColaboradorDTO colaboradorDTO) {
         return new Colaborador(
                 colaboradorDTO.idColaborador(),
+                colaboradorDTO.departamento(),
+                colaboradorDTO.cargo(),
+                colaboradorDTO.dataContratacao(),
                 colaboradorDTO.pessoa()
         );
     }
