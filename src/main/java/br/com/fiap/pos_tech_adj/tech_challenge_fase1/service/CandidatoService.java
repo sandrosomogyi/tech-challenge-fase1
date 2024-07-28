@@ -1,15 +1,15 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.service;
 
-import br.com.fiap.pos_tech_adj.tech_challenge_fase1.controller.exception.ControllerNotFoundException;
-import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.CandidatoDTO;
-import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.PessoaDTO;
-import br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities.Candidato;
-import br.com.fiap.pos_tech_adj.tech_challenge_fase1.repository.CandidatoRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import br.com.fiap.pos_tech_adj.tech_challenge_fase1.controller.exception.ControllerNotFoundException;
+import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.CandidatoDTO;
+import br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities.Candidato;
+import br.com.fiap.pos_tech_adj.tech_challenge_fase1.repository.CandidatoRepository;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class CandidatoService {
@@ -17,28 +17,28 @@ public class CandidatoService {
     private final CandidatoRepository candidatoRepository;
 
     @Autowired
-    public CandidatoService (CandidatoRepository candidatoRepository){
+    public CandidatoService(CandidatoRepository candidatoRepository) {
         this.candidatoRepository = candidatoRepository;
     }
 
-    public Page<CandidatoDTO> findAll (Pageable pageable){
+    public Page<CandidatoDTO> findAll(Pageable pageable) {
         Page<Candidato> candidatos = candidatoRepository.findAll(pageable);
         return candidatos.map(this::toDTO);
     }
 
-    public CandidatoDTO findById(Long id){
+    public CandidatoDTO findById(Long id) {
         Candidato candidato = candidatoRepository.findById(id)
                 .orElseThrow(() -> new ControllerNotFoundException("Candidato não encontrado"));
         return toDTO(candidato);
     }
 
-    public CandidatoDTO save(CandidatoDTO candidatoDTO){
+    public CandidatoDTO save(CandidatoDTO candidatoDTO) {
         Candidato candidato = candidatoRepository.save(toEntity(candidatoDTO));
         return toDTO(candidato);
     }
 
-    public CandidatoDTO update(Long id, CandidatoDTO candidatoDTO){
-        try{
+    public CandidatoDTO update(Long id, CandidatoDTO candidatoDTO) {
+        try {
             Candidato candidato = candidatoRepository.getReferenceById(id);
 
             candidato.setPessoa(candidatoDTO.pessoa());
@@ -47,13 +47,12 @@ public class CandidatoService {
 
             candidato = candidatoRepository.save(candidato);
             return toDTO(candidato);
-        }
-        catch (EntityNotFoundException e){
+        } catch (EntityNotFoundException e) {
             throw new ControllerNotFoundException("Candidato não encontrado");
         }
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         candidatoRepository.deleteById(id);
     }
 
@@ -62,8 +61,7 @@ public class CandidatoService {
                 candidato.getIdCandidato(),
                 candidato.getPessoa(),
                 candidato.getPerfilLinkedin(),
-                candidato.getCurriculo()
-        );
+                candidato.getCurriculo());
     }
 
     private Candidato toEntity(CandidatoDTO candidatoDTO) {
@@ -71,7 +69,6 @@ public class CandidatoService {
                 candidatoDTO.idCandidato(),
                 candidatoDTO.pessoa(),
                 candidatoDTO.perfilLinkedin(),
-                candidatoDTO.curriculo()
-        );
+                candidatoDTO.curriculo());
     }
 }

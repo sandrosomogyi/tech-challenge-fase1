@@ -1,9 +1,15 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
-@Table(name="tb_Vaga")
+@Table(name = "tb_Vaga")
 public class Vaga {
 
     @Id
@@ -19,14 +25,14 @@ public class Vaga {
     private Double valorBonificacao;
     private String observacoes;
 
-    //Contrutor Padrão
-    public Vaga(){
+    // Contrutor Padrão
+    public Vaga() {
     }
 
     // Construtor
     public Vaga(Long idVaga, String titulo, String descricao, String requisitosObrigatorios,
-                String requisitosDesejaveis, String beneficios, String tipoContratacao,
-                Double remuneracao, Double valorBonificacao, String observacoes) {
+            String requisitosDesejaveis, String beneficios, String tipoContratacao,
+            Double remuneracao, Double valorBonificacao, String observacoes) {
         this.idVaga = idVaga;
         this.titulo = titulo;
         this.descricao = descricao;
@@ -36,83 +42,6 @@ public class Vaga {
         this.tipoContratacao = tipoContratacao;
         this.remuneracao = remuneracao;
         this.valorBonificacao = valorBonificacao;
-        this.observacoes = observacoes;
-    }
-
-    // Getters e Setters
-    public Long getIdVaga() {
-        return idVaga;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public String getRequisitosObrigatorios() {
-        return requisitosObrigatorios;
-    }
-
-    public void setRequisitosObrigatorios(String requisitosObrigatorios) {
-        this.requisitosObrigatorios = requisitosObrigatorios;
-    }
-
-    public String getRequisitosDesejaveis() {
-        return requisitosDesejaveis;
-    }
-
-    public void setRequisitosDesejaveis(String requisitosDesejaveis) {
-        this.requisitosDesejaveis = requisitosDesejaveis;
-    }
-
-    public String getBeneficios() {
-        return beneficios;
-    }
-
-    public void setBeneficios(String beneficios) {
-        this.beneficios = beneficios;
-    }
-
-    public String getTipoContratacao() {
-        return tipoContratacao;
-    }
-
-    public void setTipoContratacao(String tipoContratacao) {
-        this.tipoContratacao = tipoContratacao;
-    }
-
-    public Double getRemuneracao() {
-        return remuneracao;
-    }
-
-    public void setRemuneracao(Double remuneracao) {
-        this.remuneracao = remuneracao;
-    }
-
-    public Double getValorBonificacao() {
-        return valorBonificacao;
-    }
-
-    public void setValorBonificacao(Double valorBonificacao) {
-        this.valorBonificacao = valorBonificacao;
-    }
-
-    public String getObservacoes() {
-        return observacoes;
-    }
-
-    public void setObservacoes(String observacoes) {
         this.observacoes = observacoes;
     }
 

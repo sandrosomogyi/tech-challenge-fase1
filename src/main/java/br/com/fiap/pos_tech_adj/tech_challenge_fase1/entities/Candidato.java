@@ -1,7 +1,15 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "tb_Candidato")
 public class Candidato {
@@ -17,8 +25,8 @@ public class Candidato {
     private String perfilLinkedin;
     private String curriculo;
 
-    //Contrutor Padrão
-    public Candidato(){
+    // Contrutor Padrão
+    public Candidato() {
     }
 
     // Construtor
@@ -26,35 +34,6 @@ public class Candidato {
         this.idCandidato = idCandidato;
         this.pessoa = pessoa;
         this.perfilLinkedin = perfilLinkedin;
-        this.curriculo = curriculo;
-    }
-
-    // Getters e Setters
-    public Long getIdCandidato() {
-        return idCandidato;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
-
-    public String getPerfilLinkedin() {
-        return perfilLinkedin;
-    }
-
-    public void setPerfilLinkedin(String perfilLinkedin) {
-        this.perfilLinkedin = perfilLinkedin;
-    }
-
-    public String getCurriculo() {
-        return curriculo;
-    }
-
-    public void setCurriculo(String curriculo) {
         this.curriculo = curriculo;
     }
 
