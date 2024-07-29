@@ -1,14 +1,15 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.controller.exception.ControllerNotFoundException;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.VagaDTO;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities.Vaga;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.repository.VagaRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 @Service
 public class VagaService {
@@ -16,28 +17,28 @@ public class VagaService {
     private final VagaRepository vagaRepository;
 
     @Autowired
-    public VagaService (VagaRepository vagaRepository){
+    public VagaService(VagaRepository vagaRepository) {
         this.vagaRepository = vagaRepository;
     }
 
-    public Page<VagaDTO> findAll (Pageable pageable){
+    public Page<VagaDTO> findAll(Pageable pageable) {
         Page<Vaga> vagas = vagaRepository.findAll(pageable);
         return vagas.map(this::toDTO);
     }
 
-    public VagaDTO findById(Long id){
+    public VagaDTO findById(Long id) {
         Vaga vaga = vagaRepository.findById(id)
                 .orElseThrow(() -> new ControllerNotFoundException("Vaga não encontrada"));
         return toDTO(vaga);
     }
 
-    public VagaDTO save(VagaDTO vagaDTO){
+    public VagaDTO save(VagaDTO vagaDTO) {
         Vaga vaga = vagaRepository.save(toEntity(vagaDTO));
         return toDTO(vaga);
     }
 
-    public VagaDTO update(Long id, VagaDTO vagaDTO){
-        try{
+    public VagaDTO update(Long id, VagaDTO vagaDTO) {
+        try {
             Vaga vaga = vagaRepository.getReferenceById(id);
 
             vaga.setTitulo(vagaDTO.titulo());
@@ -52,13 +53,12 @@ public class VagaService {
 
             vaga = vagaRepository.save(vaga);
             return toDTO(vaga);
-        }
-        catch (EntityNotFoundException e){
+        } catch (EntityNotFoundException e) {
             throw new ControllerNotFoundException("Vaga não encontrada");
         }
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         vagaRepository.deleteById(id);
     }
 
@@ -73,8 +73,8 @@ public class VagaService {
                 vaga.getTipoContratacao(),
                 vaga.getRemuneracao(),
                 vaga.getValorBonificacao(),
-                vaga.getObservacoes()
-        );
+                vaga.getObservacoes(),
+                vaga.getIndicacoes());
     }
 
     private Vaga toEntity(VagaDTO vagaDTO) {
@@ -88,7 +88,6 @@ public class VagaService {
                 vagaDTO.tipoContratacao(),
                 vagaDTO.remuneracao(),
                 vagaDTO.valorBonificacao(),
-                vagaDTO.observacoes()
-        );
+                vagaDTO.observacoes());
     }
 }

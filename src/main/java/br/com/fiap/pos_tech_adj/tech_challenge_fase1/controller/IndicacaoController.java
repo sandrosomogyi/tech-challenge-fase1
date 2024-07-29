@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.IndicacaoDTO;
-import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.VagaDTO;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.service.IndicacaoService;
 
 @RestController
@@ -45,8 +44,8 @@ public class IndicacaoController {
         return ResponseEntity.ok(indicacaoDTO);
     }
 
-    @GetMapping("/{vagaId}")
-    public List<VagaDTO> obterIndicacoesPorVaga(@PathVariable Long idVaga) {
+    @GetMapping("/{idVaga}")
+    public List<IndicacaoDTO> obterIndicacoesPorVaga(@PathVariable Long idVaga) {
         return indicacaoService.obterIndicacoesPorVaga(idVaga);
     }
 

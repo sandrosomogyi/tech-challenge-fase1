@@ -1,9 +1,13 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities;
 
+import java.util.List;
+
+import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.IndicacaoDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -24,6 +28,9 @@ public class Vaga {
     private Double remuneracao;
     private Double valorBonificacao;
     private String observacoes;
+
+    @OneToMany(mappedBy = "idVaga")
+    private List<IndicacaoDTO> indicacoes;
 
     // Contrutor Padrão
     public Vaga() {
