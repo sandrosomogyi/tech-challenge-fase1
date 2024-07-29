@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.controller.exception.ControllerNotFoundException;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.IndicacaoDTO;
+import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.VagaDTO;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities.Indicacao;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.repository.IndicacaoRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -34,7 +35,7 @@ public class IndicacaoService {
         return toDTO(indicacao);
     }
 
-    public List<IndicacaoDTO> obterIndicacoesPorVaga(Long idVaga) {
+    public List<VagaDTO> obterIndicacoesPorVaga(Long idVaga) {
         return indicacaoRepository.findByVagaId(idVaga);
     }
 
