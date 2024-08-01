@@ -44,11 +44,6 @@ public class IndicacaoController {
         return ResponseEntity.ok(indicacaoDTO);
     }
 
-    @GetMapping("/{idVaga}")
-    public List<IndicacaoDTO> obterIndicacoesPorVaga(@PathVariable Long idVaga) {
-        return indicacaoService.obterIndicacoesPorVaga(idVaga);
-    }
-
     @PostMapping
     public ResponseEntity<IndicacaoDTO> save(@RequestBody IndicacaoDTO indicacaoDTO) {
         IndicacaoDTO savedIndicacao = indicacaoService.save(indicacaoDTO);

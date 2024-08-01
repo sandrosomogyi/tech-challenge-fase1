@@ -18,18 +18,18 @@ public class Contratacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idContratacao;
+    private Long id;
 
     @OneToOne
-    @JoinColumn(name = "idVaga")
+    @JoinColumn(name = "id_vaga")
     private Vaga vaga;
 
     @OneToOne
-    @JoinColumn(name = "idColaborador")
+    @JoinColumn(name = "id_colaborador")
     private Colaborador colaborador;
 
     @OneToOne
-    @JoinColumn(name = "idCandidato")
+    @JoinColumn(name = "id_candidato")
     private Candidato candidato;
 
     private LocalDate dataInicio;
@@ -41,9 +41,9 @@ public class Contratacao {
     }
 
     // Construtor
-    public Contratacao(Long idContratacao, Vaga vaga, Colaborador colaborador, Candidato candidato,
+    public Contratacao(Long id, Vaga vaga, Colaborador colaborador, Candidato candidato,
             LocalDate dataInicio, LocalDate dataFim, boolean validado) {
-        this.idContratacao = idContratacao;
+        this.id = id;
         this.vaga = vaga;
         this.colaborador = colaborador;
         this.candidato = candidato;
@@ -56,7 +56,7 @@ public class Contratacao {
     @Override
     public String toString() {
         return "Contratacao{" +
-                "idContratacao=" + idContratacao +
+                "id=" + id +
                 ", vaga=" + vaga +
                 ", colaborador=" + colaborador +
                 ", candidato=" + candidato +

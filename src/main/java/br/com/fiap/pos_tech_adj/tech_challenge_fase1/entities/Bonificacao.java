@@ -18,22 +18,22 @@ public class Bonificacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idBonificacao;
+    private Long id;
 
     @OneToOne
-    @JoinColumn(name = "idVaga")
+    @JoinColumn(name = "id_vaga")
     private Vaga vaga;
 
     @OneToOne
-    @JoinColumn(name = "idColaborador")
+    @JoinColumn(name = "id_colaborador")
     private Colaborador colaborador;
 
     @OneToOne
-    @JoinColumn(name = "idCandidato")
+    @JoinColumn(name = "id_candidato")
     private Candidato candidato;
 
     @OneToOne
-    @JoinColumn(name = "idContratacao")
+    @JoinColumn(name = "id_contratacao")
     private Contratacao contratacao;
 
     private LocalDate dataBonificacao;
@@ -44,9 +44,9 @@ public class Bonificacao {
     }
 
     // Construtor
-    public Bonificacao(Long idBonificacao, Vaga vaga, Colaborador colaborador, Candidato candidato,
+    public Bonificacao(Long id, Vaga vaga, Colaborador colaborador, Candidato candidato,
             Contratacao contratacao, LocalDate dataBonificacao, boolean efetuada) {
-        this.idBonificacao = idBonificacao;
+        this.id = id;
         this.vaga = vaga;
         this.colaborador = colaborador;
         this.candidato = candidato;
@@ -59,7 +59,7 @@ public class Bonificacao {
     @Override
     public String toString() {
         return "Bonificacao{" +
-                "idBonificacao=" + idBonificacao +
+                "id=" + id +
                 ", vaga=" + vaga +
                 ", colaborador=" + colaborador +
                 ", candidato=" + candidato +

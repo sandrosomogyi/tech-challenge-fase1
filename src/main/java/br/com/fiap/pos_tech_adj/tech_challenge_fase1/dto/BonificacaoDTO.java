@@ -8,7 +8,7 @@ import br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities.Vaga;
 import java.time.LocalDate;
 
 public record BonificacaoDTO(
-        Long idBonificacao,
+        Long id,
         Vaga vaga,
         Colaborador colaborador,
         Candidato candidato,

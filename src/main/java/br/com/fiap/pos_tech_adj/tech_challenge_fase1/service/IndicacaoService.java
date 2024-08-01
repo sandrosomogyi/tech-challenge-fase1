@@ -1,5 +1,6 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +35,6 @@ public class IndicacaoService {
         return toDTO(indicacao);
     }
 
-    public List<IndicacaoDTO> obterIndicacoesPorVaga(Long idVaga) {
-        return indicacaoRepository.findByVagaId(idVaga);
-    }
-
     public IndicacaoDTO save(IndicacaoDTO IndicacaoDTO) {
         Indicacao indicacao = indicacaoRepository.save(toEntity(IndicacaoDTO));
         return toDTO(indicacao);
@@ -69,7 +66,7 @@ public class IndicacaoService {
 
     private IndicacaoDTO toDTO(Indicacao indicacao) {
         return new IndicacaoDTO(
-                indicacao.getIdIndicacao(),
+                indicacao.getId(),
                 indicacao.getVaga(),
                 indicacao.getColaborador(),
                 indicacao.getTelefoneCandidato(),
@@ -82,7 +79,7 @@ public class IndicacaoService {
 
     private Indicacao toEntity(IndicacaoDTO indicacaoDTO) {
         return new Indicacao(
-                indicacaoDTO.idIndicacao(),
+                indicacaoDTO.id(),
                 indicacaoDTO.vaga(),
                 indicacaoDTO.colaborador(),
                 indicacaoDTO.telefoneCandidato(),

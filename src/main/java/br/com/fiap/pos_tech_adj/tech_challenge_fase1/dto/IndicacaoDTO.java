@@ -4,7 +4,7 @@ import br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities.Colaborador;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities.Vaga;
 
 public record IndicacaoDTO(
-                Long idIndicacao,
+                Long id,
                 Vaga vaga,
                 Colaborador colaborador,
                 String telefoneCandidato,

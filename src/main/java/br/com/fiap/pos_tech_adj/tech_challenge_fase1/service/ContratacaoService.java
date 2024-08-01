@@ -61,7 +61,7 @@ public class ContratacaoService {
 
     private ContratacaoDTO toDTO(Contratacao contratacao) {
         return new ContratacaoDTO(
-                contratacao.getIdContratacao(),
+                contratacao.getId(),
                 contratacao.getVaga(),
                 contratacao.getColaborador(),
                 contratacao.getCandidato(),
@@ -73,7 +73,7 @@ public class ContratacaoService {
 
     private Contratacao toEntity(ContratacaoDTO contratacaoDTO) {
         return new Contratacao(
-                contratacaoDTO.idContratacao(),
+                contratacaoDTO.id(),
                 contratacaoDTO.vaga(),
                 contratacaoDTO.colaborador(),
                 contratacaoDTO.candidato(),

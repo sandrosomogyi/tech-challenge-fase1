@@ -64,7 +64,7 @@ public class VagaService {
 
     private VagaDTO toDTO(Vaga vaga) {
         return new VagaDTO(
-                vaga.getIdVaga(),
+                vaga.getId(),
                 vaga.getTitulo(),
                 vaga.getDescricao(),
                 vaga.getRequisitosObrigatorios(),
@@ -79,7 +79,7 @@ public class VagaService {
 
     private Vaga toEntity(VagaDTO vagaDTO) {
         return new Vaga(
-                vagaDTO.idVaga(),
+                vagaDTO.id(),
                 vagaDTO.titulo(),
                 vagaDTO.descricao(),
                 vagaDTO.requisitosObrigatorios(),

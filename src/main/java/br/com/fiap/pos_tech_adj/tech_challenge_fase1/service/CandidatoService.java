@@ -58,7 +58,7 @@ public class CandidatoService {
 
     private CandidatoDTO toDTO(Candidato candidato) {
         return new CandidatoDTO(
-                candidato.getIdCandidato(),
+                candidato.getId(),
                 candidato.getPessoa(),
                 candidato.getPerfilLinkedin(),
                 candidato.getCurriculo());
@@ -66,7 +66,7 @@ public class CandidatoService {
 
     private Candidato toEntity(CandidatoDTO candidatoDTO) {
         return new Candidato(
-                candidatoDTO.idCandidato(),
+                candidatoDTO.id(),
                 candidatoDTO.pessoa(),
                 candidatoDTO.perfilLinkedin(),
                 candidatoDTO.curriculo());

@@ -59,7 +59,7 @@ public class PessoaService {
 
     private PessoaDTO toDTO(Pessoa pessoa) {
         return new PessoaDTO(
-                pessoa.getIdPessoa(),
+                pessoa.getId(),
                 pessoa.getNome(),
                 pessoa.getSobrenome(),
                 pessoa.getTelefone(),
@@ -69,7 +69,7 @@ public class PessoaService {
 
     private Pessoa toEntity(PessoaDTO pessoaDTO) {
         return new Pessoa(
-                pessoaDTO.idPessoa(),
+                pessoaDTO.id(),
                 pessoaDTO.nome(),
                 pessoaDTO.sobrenome(),
                 pessoaDTO.telefone(),

@@ -16,10 +16,10 @@ public class Candidato {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCandidato;
+    private Long id;
 
     @OneToOne
-    @JoinColumn(name = "idPessoa")
+    @JoinColumn(name = "id_pessoa")
     private Pessoa pessoa;
 
     private String perfilLinkedin;
@@ -30,8 +30,8 @@ public class Candidato {
     }
 
     // Construtor
-    public Candidato(Long idCandidato, Pessoa pessoa, String perfilLinkedin, String curriculo) {
-        this.idCandidato = idCandidato;
+    public Candidato(Long id, Pessoa pessoa, String perfilLinkedin, String curriculo) {
+        this.id = id;
         this.pessoa = pessoa;
         this.perfilLinkedin = perfilLinkedin;
         this.curriculo = curriculo;
@@ -40,7 +40,7 @@ public class Candidato {
     @Override
     public String toString() {
         return "Candidato{" +
-                "idCandidato=" + idCandidato +
+                "id=" + id +
                 ", nome='" + pessoa.getNome() + '\'' +
                 ", sobrenome='" + pessoa.getSobrenome() + '\'' +
                 ", telefone='" + pessoa.getTelefone() + '\'' +

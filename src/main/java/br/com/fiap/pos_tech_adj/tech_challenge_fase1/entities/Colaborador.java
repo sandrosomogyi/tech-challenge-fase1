@@ -18,14 +18,14 @@ public class Colaborador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idColaborador;
+    private Long id;
 
     private String departamento;
     private String cargo;
     private LocalDate dataContratacao;
 
     @OneToOne
-    @JoinColumn(name = "idPessoa")
+    @JoinColumn(name = "id_pessoa")
     private Pessoa pessoa;
 
     // Construtor Padrão
@@ -33,9 +33,9 @@ public class Colaborador {
     }
 
     // Construtor com todos os parâmetros
-    public Colaborador(Long idColaborador, String departamento, String cargo, LocalDate dataContratacao,
+    public Colaborador(Long id, String departamento, String cargo, LocalDate dataContratacao,
             Pessoa pessoa) {
-        this.idColaborador = idColaborador;
+        this.id = id;
         this.departamento = departamento;
         this.cargo = cargo;
         this.dataContratacao = dataContratacao;
@@ -46,7 +46,7 @@ public class Colaborador {
     @Override
     public String toString() {
         return "Colaborador{" +
-                "idColaborador=" + idColaborador +
+                "id=" + id +
                 ", departamento='" + departamento + '\'' +
                 ", cargo='" + cargo + '\'' +
                 ", dataContratacao=" + dataContratacao +

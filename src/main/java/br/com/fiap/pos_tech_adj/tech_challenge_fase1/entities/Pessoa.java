@@ -14,7 +14,7 @@ public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPessoa;
+    private Long id;
 
     private String nome;
     private String sobrenome;
@@ -25,8 +25,8 @@ public class Pessoa {
     public Pessoa() {
     }
 
-    public Pessoa(Long idPessoa, String nome, String sobrenome, String telefone, String email) {
-        this.idPessoa = idPessoa;
+    public Pessoa(Long id, String nome, String sobrenome, String telefone, String email) {
+        this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.telefone = telefone;

@@ -58,7 +58,7 @@ public class ColaboradorService {
 
     private ColaboradorDTO toDTO(Colaborador colaborador) {
         return new ColaboradorDTO(
-                colaborador.getIdColaborador(),
+                colaborador.getId(),
                 colaborador.getDepartamento(),
                 colaborador.getCargo(),
                 colaborador.getDataContratacao(),
@@ -68,7 +68,7 @@ public class ColaboradorService {
 
     private Colaborador toEntity(ColaboradorDTO colaboradorDTO) {
         return new Colaborador(
-                colaboradorDTO.idColaborador(),
+                colaboradorDTO.id(),
                 colaboradorDTO.departamento(),
                 colaboradorDTO.cargo(),
                 colaboradorDTO.dataContratacao(),

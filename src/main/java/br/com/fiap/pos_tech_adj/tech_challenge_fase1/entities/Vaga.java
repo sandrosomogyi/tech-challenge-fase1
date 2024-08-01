@@ -2,7 +2,7 @@ package br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities;
 
 import java.util.List;
 
-import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.IndicacaoDTO;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,7 +18,8 @@ public class Vaga {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idVaga;
+    private Long id;
+
     private String titulo;
     private String descricao;
     private String requisitosObrigatorios;
@@ -29,18 +30,19 @@ public class Vaga {
     private Double valorBonificacao;
     private String observacoes;
 
-    @OneToMany(mappedBy = "idVaga")
-    private List<IndicacaoDTO> indicacoes;
+    @OneToMany(mappedBy = "vaga")
+    @JsonManagedReference
+    private List<Indicacao> indicacoes;
 
     // Contrutor Padrão
     public Vaga() {
     }
 
     // Construtor
-    public Vaga(Long idVaga, String titulo, String descricao, String requisitosObrigatorios,
+    public Vaga(Long id, String titulo, String descricao, String requisitosObrigatorios,
             String requisitosDesejaveis, String beneficios, String tipoContratacao,
             Double remuneracao, Double valorBonificacao, String observacoes) {
-        this.idVaga = idVaga;
+        this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
         this.requisitosObrigatorios = requisitosObrigatorios;
@@ -56,7 +58,7 @@ public class Vaga {
     @Override
     public String toString() {
         return "Vaga{" +
-                "idVaga=" + idVaga +
+                "id=" + id +
                 ", titulo='" + titulo + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", requisitosObrigatorios='" + requisitosObrigatorios + '\'' +

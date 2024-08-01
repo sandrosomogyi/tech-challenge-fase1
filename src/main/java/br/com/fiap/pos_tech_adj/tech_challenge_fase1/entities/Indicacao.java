@@ -1,12 +1,7 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -16,14 +11,15 @@ public class Indicacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idIndicacao;
+    private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "idVaga")
+    @ManyToOne
+    @JoinColumn(name = "id_vaga")
+    @JsonBackReference
     private Vaga vaga;
 
     @OneToOne
-    @JoinColumn(name = "idColaborador")
+    @JoinColumn(name = "id_colaborador")
     private Colaborador colaborador;
 
     private String telefoneCandidato;
@@ -38,10 +34,10 @@ public class Indicacao {
     }
 
     // Construtor
-    public Indicacao(Long idIndicacao, Vaga vaga, Colaborador colaborador, String telefoneCandidato,
+    public Indicacao(Long id, Vaga vaga, Colaborador colaborador, String telefoneCandidato,
             String emailCandidato, String curriculoCandidato, String perfilCandidato,
             String observacoes, boolean validado) {
-        this.idIndicacao = idIndicacao;
+        this.id = id;
         this.vaga = vaga;
         this.colaborador = colaborador;
         this.telefoneCandidato = telefoneCandidato;
@@ -56,7 +52,7 @@ public class Indicacao {
     @Override
     public String toString() {
         return "Indicacao{" +
-                "idIndicacao=" + idIndicacao +
+                "id=" + id +
                 ", vaga=" + vaga +
                 ", colaborador=" + colaborador +
                 ", telefoneCandidato='" + telefoneCandidato + '\'' +

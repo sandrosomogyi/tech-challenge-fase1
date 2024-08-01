@@ -61,7 +61,7 @@ public class BonificacaoService {
 
     private BonificacaoDTO toDTO(Bonificacao bonificacao) {
         return new BonificacaoDTO(
-                bonificacao.getIdBonificacao(),
+                bonificacao.getId(),
                 bonificacao.getVaga(),
                 bonificacao.getColaborador(),
                 bonificacao.getCandidato(),
@@ -73,7 +73,7 @@ public class BonificacaoService {
 
     private Bonificacao toEntity(BonificacaoDTO bonificacaoDTO) {
         return new Bonificacao(
-                bonificacaoDTO.idBonificacao(),
+                bonificacaoDTO.id(),
                 bonificacaoDTO.vaga(),
                 bonificacaoDTO.colaborador(),
                 bonificacaoDTO.candidato(),
