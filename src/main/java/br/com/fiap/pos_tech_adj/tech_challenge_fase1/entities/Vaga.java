@@ -31,7 +31,7 @@ public class Vaga {
     private String observacoes;
 
     @OneToMany(mappedBy = "vaga")
-    @JsonManagedReference
+    @JsonManagedReference(value = "vaga-indicacao")
     private List<Indicacao> indicacoes;
 
     // Contrutor Padrão
@@ -41,7 +41,7 @@ public class Vaga {
     // Construtor
     public Vaga(Long id, String titulo, String descricao, String requisitosObrigatorios,
             String requisitosDesejaveis, String beneficios, String tipoContratacao,
-            Double remuneracao, Double valorBonificacao, String observacoes) {
+            Double remuneracao, Double valorBonificacao, String observacoes, List<Indicacao> indicacoes) {
         this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
@@ -52,6 +52,7 @@ public class Vaga {
         this.remuneracao = remuneracao;
         this.valorBonificacao = valorBonificacao;
         this.observacoes = observacoes;
+        this.indicacoes = indicacoes;
     }
 
     // toString para facilitar a visualização

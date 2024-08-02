@@ -88,6 +88,7 @@ public class VagaService {
                 vagaDTO.tipoContratacao(),
                 vagaDTO.remuneracao(),
                 vagaDTO.valorBonificacao(),
-                vagaDTO.observacoes());
+                vagaDTO.observacoes(),
+                vagaDTO.indicacoes());
     }
 }

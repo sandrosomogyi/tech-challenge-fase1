@@ -1,6 +1,8 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.service;
 
+import br.com.fiap.pos_tech_adj.tech_challenge_fase1.controller.exception.ControllerDatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -33,8 +35,14 @@ public class CandidatoService {
     }
 
     public CandidatoDTO save(CandidatoDTO candidatoDTO) {
-        Candidato candidato = candidatoRepository.save(toEntity(candidatoDTO));
-        return toDTO(candidato);
+        try {
+            Candidato candidato = candidatoRepository.save(toEntity(candidatoDTO));
+            return toDTO(candidato);
+        }catch (EntityNotFoundException e) {
+            throw new ControllerNotFoundException("Entidade não encontrada");
+        }catch (DataIntegrityViolationException e){
+            throw new ControllerDatabaseException("Erro no database causado por: " + e.getMessage());
+        }
     }
 
     public CandidatoDTO update(Long id, CandidatoDTO candidatoDTO) {
@@ -49,6 +57,8 @@ public class CandidatoService {
             return toDTO(candidato);
         } catch (EntityNotFoundException e) {
             throw new ControllerNotFoundException("Candidato não encontrado");
+        }catch (DataIntegrityViolationException e){
+            throw new ControllerDatabaseException("Erro no database causado por: " + e.getMessage());
         }
     }
 

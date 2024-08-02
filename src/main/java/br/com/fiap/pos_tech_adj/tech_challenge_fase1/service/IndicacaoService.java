@@ -3,7 +3,9 @@ package br.com.fiap.pos_tech_adj.tech_challenge_fase1.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.fiap.pos_tech_adj.tech_challenge_fase1.controller.exception.ControllerDatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -36,8 +38,15 @@ public class IndicacaoService {
     }
 
     public IndicacaoDTO save(IndicacaoDTO IndicacaoDTO) {
-        Indicacao indicacao = indicacaoRepository.save(toEntity(IndicacaoDTO));
-        return toDTO(indicacao);
+        try {
+            Indicacao indicacao = indicacaoRepository.save(toEntity(IndicacaoDTO));
+            return toDTO(indicacao);
+        }
+        catch (EntityNotFoundException e) {
+            throw new ControllerNotFoundException("Entidade não encontrada");
+        }catch (DataIntegrityViolationException e){
+            throw new ControllerDatabaseException("Erro no database causado por: " + e.getMessage());
+        }
     }
 
     public IndicacaoDTO update(Long id, IndicacaoDTO indicacaoDTO) {
@@ -57,6 +66,8 @@ public class IndicacaoService {
             return toDTO(indicacao);
         } catch (EntityNotFoundException e) {
             throw new ControllerNotFoundException("Indicação não encontrada");
+        }catch (DataIntegrityViolationException e){
+            throw new ControllerDatabaseException("Erro no database causado por: " + e.getMessage());
         }
     }
 

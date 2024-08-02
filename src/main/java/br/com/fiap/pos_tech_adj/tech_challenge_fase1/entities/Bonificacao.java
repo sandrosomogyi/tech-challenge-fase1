@@ -2,13 +2,8 @@ package br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -22,18 +17,22 @@ public class Bonificacao {
 
     @OneToOne
     @JoinColumn(name = "id_vaga")
+    @JsonBackReference(value = "vaga-bonificacao")
     private Vaga vaga;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_colaborador")
+    @JsonBackReference(value = "colaborador-bonificacao")
     private Colaborador colaborador;
 
     @OneToOne
     @JoinColumn(name = "id_candidato")
+    @JsonBackReference(value = "candidato-bonificacao")
     private Candidato candidato;
 
     @OneToOne
     @JoinColumn(name = "id_contratacao")
+    @JsonBackReference(value = "contratacao-bonificacao")
     private Contratacao contratacao;
 
     private LocalDate dataBonificacao;

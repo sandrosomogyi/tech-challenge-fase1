@@ -15,11 +15,12 @@ public class Indicacao {
 
     @ManyToOne
     @JoinColumn(name = "id_vaga")
-    @JsonBackReference
+    @JsonBackReference(value = "vaga-indicacao")
     private Vaga vaga;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_colaborador")
+    @JsonBackReference(value = "colaborador-indicacao")
     private Colaborador colaborador;
 
     private String telefoneCandidato;

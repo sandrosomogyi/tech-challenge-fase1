@@ -27,4 +27,19 @@ public class ControllerExceptionHandler {
 
         return ResponseEntity.status(status).body(this.standardError);
     }
+
+    @ExceptionHandler(ControllerDatabaseException.class)
+    public ResponseEntity<StandardError> databaseException (
+            ControllerDatabaseException controllerDatabaseException,
+            HttpServletRequest request){
+
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        standardError.setTimeStamp(Instant.now());
+        standardError.setStatus(status.value());
+        standardError.setError("Database Exception");
+        standardError.setMessage(controllerDatabaseException.getMessage());
+        standardError.setPath(request.getRequestURI());
+
+        return ResponseEntity.status(status).body(this.standardError);
+    }
 }

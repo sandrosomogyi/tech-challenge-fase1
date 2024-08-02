@@ -1,11 +1,13 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.service;
 
+import br.com.fiap.pos_tech_adj.tech_challenge_fase1.controller.exception.ControllerDatabaseException;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.controller.exception.ControllerNotFoundException;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.ColaboradorDTO;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities.Colaborador;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.repository.ColaboradorRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -32,8 +34,14 @@ public class ColaboradorService {
     }
 
     public ColaboradorDTO save(ColaboradorDTO colaboradorDTO) {
-        Colaborador colaborador = colaboradorRepository.save(toEntity(colaboradorDTO));
-        return toDTO(colaborador);
+        try {
+            Colaborador colaborador = colaboradorRepository.save(toEntity(colaboradorDTO));
+            return toDTO(colaborador);
+        }catch (EntityNotFoundException e) {
+            throw new ControllerNotFoundException("Entidade não encontrada");
+        }catch (DataIntegrityViolationException e){
+            throw new ControllerDatabaseException("Erro no database causado por: " + e.getMessage());
+        }
     }
 
     public ColaboradorDTO update(Long id, ColaboradorDTO colaboradorDTO) {
@@ -49,6 +57,8 @@ public class ColaboradorService {
             return toDTO(colaborador);
         } catch (EntityNotFoundException e) {
             throw new ControllerNotFoundException("Colaborador não encontrado");
+        }catch (DataIntegrityViolationException e){
+            throw new ControllerDatabaseException("Erro no database causado por: " + e.getMessage());
         }
     }
 
@@ -62,7 +72,9 @@ public class ColaboradorService {
                 colaborador.getDepartamento(),
                 colaborador.getCargo(),
                 colaborador.getDataContratacao(),
-                colaborador.getPessoa()
+                colaborador.getPessoa(),
+                colaborador.getIndicacoes(),
+                colaborador.getBonificacoes()
         );
     }
 
@@ -72,7 +84,9 @@ public class ColaboradorService {
                 colaboradorDTO.departamento(),
                 colaboradorDTO.cargo(),
                 colaboradorDTO.dataContratacao(),
-                colaboradorDTO.pessoa()
+                colaboradorDTO.pessoa(),
+                colaboradorDTO.indicacoes(),
+                colaboradorDTO.bonificacoes()
         );
     }
 }

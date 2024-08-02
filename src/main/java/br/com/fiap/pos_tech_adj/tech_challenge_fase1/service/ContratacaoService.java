@@ -1,11 +1,13 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.service;
 
+import br.com.fiap.pos_tech_adj.tech_challenge_fase1.controller.exception.ControllerDatabaseException;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.controller.exception.ControllerNotFoundException;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto.ContratacaoDTO;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities.Contratacao;
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.repository.ContratacaoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -32,8 +34,15 @@ public class ContratacaoService {
     }
 
     public ContratacaoDTO save(ContratacaoDTO contratacaoDTO){
-        Contratacao contratacao = contratacaoRepository.save(toEntity(contratacaoDTO));
-        return toDTO(contratacao);
+        try {
+            Contratacao contratacao = contratacaoRepository.save(toEntity(contratacaoDTO));
+            return toDTO(contratacao);
+        }
+        catch (EntityNotFoundException e){
+            throw new ControllerNotFoundException("Entidade não encontrada");
+        }catch (DataIntegrityViolationException e){
+            throw new ControllerDatabaseException("Erro no database causado por: " + e.getMessage());
+        }
     }
 
     public ContratacaoDTO update(Long id, ContratacaoDTO contratacaoDTO){
@@ -52,6 +61,8 @@ public class ContratacaoService {
         }
         catch (EntityNotFoundException e){
             throw new ControllerNotFoundException("Contratação não encontrada");
+        }catch (DataIntegrityViolationException e){
+            throw new ControllerDatabaseException("Erro no database causado por: " + e.getMessage());
         }
     }
 

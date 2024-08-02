@@ -1,14 +1,10 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -28,18 +24,28 @@ public class Colaborador {
     @JoinColumn(name = "id_pessoa")
     private Pessoa pessoa;
 
+    @OneToMany(mappedBy = "colaborador")
+    @JsonManagedReference(value = "colaborador-indicacao")
+    private List<Indicacao> indicacoes;
+
+    @OneToMany(mappedBy = "colaborador")
+    @JsonManagedReference(value = "colaborador-bonificacao")
+    private List<Bonificacao> bonificacoes;
+
     // Construtor Padrão
     public Colaborador() {
     }
 
     // Construtor com todos os parâmetros
     public Colaborador(Long id, String departamento, String cargo, LocalDate dataContratacao,
-            Pessoa pessoa) {
+            Pessoa pessoa, List<Indicacao> indicacoes, List<Bonificacao> bonificacoes) {
         this.id = id;
         this.departamento = departamento;
         this.cargo = cargo;
         this.dataContratacao = dataContratacao;
         this.pessoa = pessoa;
+        this.indicacoes = indicacoes;
+        this.bonificacoes = bonificacoes;
     }
 
     // toString para facilitar a visualização
