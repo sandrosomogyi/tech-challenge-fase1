@@ -9,6 +9,8 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.time.LocalDate;
+
 @Data
 @Entity
 @Table(name = "tb_Candidato")
@@ -25,28 +27,31 @@ public class Candidato {
     private String perfilLinkedin;
     private String curriculo;
 
+    @OneToOne
+    @JoinColumn(name="id_colaborador")
+    private Colaborador colaborador;
+
+
     // Contrutor Padrão
     public Candidato() {
     }
 
-    // Construtor
-    public Candidato(Long id, Pessoa pessoa, String perfilLinkedin, String curriculo) {
+    public Candidato(Long id, Pessoa pessoa, String perfilLinkedin, String curriculo,  Colaborador colaborador) {
         this.id = id;
         this.pessoa = pessoa;
         this.perfilLinkedin = perfilLinkedin;
         this.curriculo = curriculo;
+        this.colaborador = colaborador;
     }
 
     @Override
     public String toString() {
         return "Candidato{" +
                 "id=" + id +
-                ", nome='" + pessoa.getNome() + '\'' +
-                ", sobrenome='" + pessoa.getSobrenome() + '\'' +
-                ", telefone='" + pessoa.getTelefone() + '\'' +
-                ", email='" + pessoa.getEmail() + '\'' +
+                ", pessoa=" + pessoa +
                 ", perfilLinkedin='" + perfilLinkedin + '\'' +
                 ", curriculo='" + curriculo + '\'' +
+                ", colaborador=" + colaborador +
                 '}';
     }
 }

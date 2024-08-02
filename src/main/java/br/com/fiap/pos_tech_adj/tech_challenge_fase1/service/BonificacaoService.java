@@ -55,7 +55,25 @@ public class BonificacaoService {
             bonificacao.setCandidato(bonificacaoDTO.candidato());
             bonificacao.setContratacao(bonificacaoDTO.contratacao());
             bonificacao.setDataBonificacao(bonificacaoDTO.dataBonificacao());
-            bonificacao.setEfetuada(bonificacaoDTO.efetuada());
+
+            if (bonificacao.isEfetuada() != bonificacaoDTO.efetuada()){
+
+                bonificacao.setEfetuada(bonificacaoDTO.efetuada());
+
+                EmailService emailService = new EmailService();
+
+                if (bonificacaoDTO.efetuada()) {
+                    emailService.sendEmail(bonificacao.getColaborador().getPessoa().getEmail(),
+                            "Bonificação",
+                            "Sua Bonificação referente a Vaga: " + bonificacao.getVaga().getTitulo() +
+                                    " Atendeu a todas as regras e será efetuada em breve.");
+                }else {
+                    emailService.sendEmail(bonificacao.getColaborador().getPessoa().getEmail(),
+                            "Bonificação",
+                            "Sua Bonificação referente a Vaga: " + bonificacao.getVaga().getTitulo() +
+                                    " Não atendeu a todas as regras e não iremos prosseguir com a Bonificação.");
+                }
+            }
 
             bonificacao = bonificacaoRepository.save(bonificacao);
             return toDTO(bonificacao);

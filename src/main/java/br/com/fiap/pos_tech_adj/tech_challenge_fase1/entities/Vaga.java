@@ -1,5 +1,6 @@
 package br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -29,6 +30,8 @@ public class Vaga {
     private Double remuneracao;
     private Double valorBonificacao;
     private String observacoes;
+    private Boolean finalizada;
+    private LocalDate dataVaga;
 
     @OneToMany(mappedBy = "vaga")
     @JsonManagedReference(value = "vaga-indicacao")
@@ -41,7 +44,7 @@ public class Vaga {
     // Construtor
     public Vaga(Long id, String titulo, String descricao, String requisitosObrigatorios,
             String requisitosDesejaveis, String beneficios, String tipoContratacao,
-            Double remuneracao, Double valorBonificacao, String observacoes, List<Indicacao> indicacoes) {
+            Double remuneracao, Double valorBonificacao, String observacoes, Boolean finalizada, LocalDate dataVaga, List<Indicacao> indicacoes) {
         this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
@@ -52,6 +55,8 @@ public class Vaga {
         this.remuneracao = remuneracao;
         this.valorBonificacao = valorBonificacao;
         this.observacoes = observacoes;
+        this.finalizada = finalizada;
+        this.dataVaga = dataVaga;
         this.indicacoes = indicacoes;
     }
 

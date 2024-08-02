@@ -60,7 +60,25 @@ public class IndicacaoService {
             indicacao.setCurriculoCandidato(indicacaoDTO.curriculoCandidato());
             indicacao.setPerfilCandidato(indicacaoDTO.perfilCandidato());
             indicacao.setObservacoes(indicacaoDTO.observacoes());
-            indicacao.setValidado(indicacaoDTO.validado());
+
+            if (indicacao.isValidado() != indicacaoDTO.validado()){
+
+                indicacao.setValidado(indicacaoDTO.validado());
+
+                EmailService emailService = new EmailService();
+
+                if (indicacaoDTO.validado()) {
+                    emailService.sendEmail(indicacao.getColaborador().getPessoa().getEmail(),
+                            "Indicação",
+                            "Sua Indicação referente a Vaga: " + indicacao.getVaga().getTitulo() +
+                                    " Foi validada.");
+                }else {
+                    emailService.sendEmail(indicacao.getColaborador().getPessoa().getEmail(),
+                            "Indicação",
+                            "Sua Indicação referente a Vaga: " + indicacao.getVaga().getTitulo() +
+                                    " Não foi validada.");
+                }
+            }
 
             indicacao = indicacaoRepository.save(indicacao);
             return toDTO(indicacao);

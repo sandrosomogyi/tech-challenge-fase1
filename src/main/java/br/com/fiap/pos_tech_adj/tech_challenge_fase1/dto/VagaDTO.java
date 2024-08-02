@@ -2,6 +2,7 @@ package br.com.fiap.pos_tech_adj.tech_challenge_fase1.dto;
 
 import br.com.fiap.pos_tech_adj.tech_challenge_fase1.entities.Indicacao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public record VagaDTO(
@@ -15,6 +16,8 @@ public record VagaDTO(
                 Double remuneracao,
                 Double valorBonificacao,
                 String observacoes,
+                Boolean finalizada,
+                LocalDate dataVaga,
                 List<Indicacao> indicacoes) {
 
 }

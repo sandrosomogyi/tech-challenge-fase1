@@ -50,6 +50,8 @@ public class VagaService {
             vaga.setRemuneracao(vagaDTO.remuneracao());
             vaga.setValorBonificacao(vagaDTO.valorBonificacao());
             vaga.setObservacoes(vagaDTO.observacoes());
+            vaga.setFinalizada(vagaDTO.finalizada());
+            vaga.setDataVaga(vagaDTO.dataVaga());
 
             vaga = vagaRepository.save(vaga);
             return toDTO(vaga);
@@ -74,6 +76,8 @@ public class VagaService {
                 vaga.getRemuneracao(),
                 vaga.getValorBonificacao(),
                 vaga.getObservacoes(),
+                vaga.getFinalizada(),
+                vaga.getDataVaga(),
                 vaga.getIndicacoes());
     }
 
@@ -89,6 +93,8 @@ public class VagaService {
                 vagaDTO.remuneracao(),
                 vagaDTO.valorBonificacao(),
                 vagaDTO.observacoes(),
+                vagaDTO.finalizada(),
+                vagaDTO.dataVaga(),
                 vagaDTO.indicacoes());
     }
 }

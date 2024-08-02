@@ -36,6 +36,15 @@ public class ContratacaoService {
     public ContratacaoDTO save(ContratacaoDTO contratacaoDTO){
         try {
             Contratacao contratacao = contratacaoRepository.save(toEntity(contratacaoDTO));
+
+            EmailService emailService = new EmailService();
+            emailService.sendEmail(contratacao.getColaborador().getPessoa().getEmail(),
+                    "Contratação",
+                    "Seu indicado: " + contratacao.getCandidato().getPessoa().getNome() +
+                            " " + contratacao.getCandidato().getPessoa().getSobrenome() +
+                            " Foi contratado, assim que atender as regras de bonificação você será notificado."
+            );
+
             return toDTO(contratacao);
         }
         catch (EntityNotFoundException e){
@@ -54,7 +63,25 @@ public class ContratacaoService {
             contratacao.setCandidato(contratacaoDTO.candidato());
             contratacao.setDataInicio(contratacaoDTO.dataInicio());
             contratacao.setDataFim(contratacaoDTO.dataFim());
-            contratacao.setValidado(contratacaoDTO.validado());
+
+            if (contratacao.isValidado() != contratacaoDTO.validado()){
+
+                contratacao.setValidado(contratacaoDTO.validado());
+
+                EmailService emailService = new EmailService();
+
+                if (contratacaoDTO.validado()) {
+                    emailService.sendEmail(contratacao.getColaborador().getPessoa().getEmail(),
+                            "Contratação",
+                            "Sua Indicação referente a Vaga: " + contratacao.getVaga().getTitulo() +
+                                    " Atendeu as regras para bonificação e você será notificado em breve com mais informações.");
+                }else {
+                    emailService.sendEmail(contratacao.getColaborador().getPessoa().getEmail(),
+                            "Contratação",
+                            "Sua Indicação referente a Vaga: " + contratacao.getVaga().getTitulo() +
+                                    " Não atendeu as regras para bonificação.");
+                }
+            }
 
             contratacao = contratacaoRepository.save(contratacao);
             return toDTO(contratacao);

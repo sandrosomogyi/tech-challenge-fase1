@@ -42,4 +42,19 @@ public class ControllerExceptionHandler {
 
         return ResponseEntity.status(status).body(this.standardError);
     }
+
+    @ExceptionHandler(ControllerMessagingException.class)
+    public ResponseEntity<StandardError> messagingException (
+            ControllerMessagingException controllerMessagingException,
+            HttpServletRequest request){
+
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        standardError.setTimeStamp(Instant.now());
+        standardError.setStatus(status.value());
+        standardError.setError("Messaging Exception");
+        standardError.setMessage(controllerMessagingException.getMessage());
+        standardError.setPath(request.getRequestURI());
+
+        return ResponseEntity.status(status).body(this.standardError);
+    }
 }
