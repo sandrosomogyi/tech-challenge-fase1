@@ -22,6 +22,9 @@ public class IndicacaoService {
     private final IndicacaoRepository indicacaoRepository;
 
     @Autowired
+    private EmailService emailService;
+
+    @Autowired
     public IndicacaoService(IndicacaoRepository indicacaoRepository) {
         this.indicacaoRepository = indicacaoRepository;
     }
@@ -64,8 +67,6 @@ public class IndicacaoService {
             if (indicacao.isValidado() != indicacaoDTO.validado()){
 
                 indicacao.setValidado(indicacaoDTO.validado());
-
-                EmailService emailService = new EmailService();
 
                 if (indicacaoDTO.validado()) {
                     emailService.sendEmail(indicacao.getColaborador().getPessoa().getEmail(),

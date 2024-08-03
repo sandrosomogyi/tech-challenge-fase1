@@ -18,6 +18,9 @@ public class ContratacaoService {
     private final ContratacaoRepository contratacaoRepository;
 
     @Autowired
+    private EmailService emailService;
+
+    @Autowired
     public ContratacaoService (ContratacaoRepository contratacaoRepository){
         this.contratacaoRepository = contratacaoRepository;
     }
@@ -37,7 +40,6 @@ public class ContratacaoService {
         try {
             Contratacao contratacao = contratacaoRepository.save(toEntity(contratacaoDTO));
 
-            EmailService emailService = new EmailService();
             emailService.sendEmail(contratacao.getColaborador().getPessoa().getEmail(),
                     "Contratação",
                     "Seu indicado: " + contratacao.getCandidato().getPessoa().getNome() +
@@ -67,8 +69,6 @@ public class ContratacaoService {
             if (contratacao.isValidado() != contratacaoDTO.validado()){
 
                 contratacao.setValidado(contratacaoDTO.validado());
-
-                EmailService emailService = new EmailService();
 
                 if (contratacaoDTO.validado()) {
                     emailService.sendEmail(contratacao.getColaborador().getPessoa().getEmail(),

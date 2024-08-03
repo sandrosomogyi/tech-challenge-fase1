@@ -18,6 +18,9 @@ public class BonificacaoService {
     private final BonificacaoRepository bonificacaoRepository;
 
     @Autowired
+    private EmailService emailService;
+
+    @Autowired
     public BonificacaoService (BonificacaoRepository bonificacaoRepository){
         this.bonificacaoRepository = bonificacaoRepository;
     }
@@ -59,8 +62,6 @@ public class BonificacaoService {
             if (bonificacao.isEfetuada() != bonificacaoDTO.efetuada()){
 
                 bonificacao.setEfetuada(bonificacaoDTO.efetuada());
-
-                EmailService emailService = new EmailService();
 
                 if (bonificacaoDTO.efetuada()) {
                     emailService.sendEmail(bonificacao.getColaborador().getPessoa().getEmail(),
