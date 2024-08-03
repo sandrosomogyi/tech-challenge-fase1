@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "tb_Bonificacao")
+@Table(name = "tb_bonificacao")
 public class Bonificacao {
 
     @Id
