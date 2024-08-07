@@ -40,13 +40,6 @@ public class ContratacaoService {
         try {
             Contratacao contratacao = contratacaoRepository.save(toEntity(contratacaoDTO));
 
-            emailService.sendEmail(contratacao.getColaborador().getPessoa().getEmail(),
-                    "Contratação",
-                    "Seu indicado: " + contratacao.getCandidato().getPessoa().getNome() +
-                            " " + contratacao.getCandidato().getPessoa().getSobrenome() +
-                            " Foi contratado, assim que atender as regras de bonificação você será notificado."
-            );
-
             return toDTO(contratacao);
         }
         catch (EntityNotFoundException e){

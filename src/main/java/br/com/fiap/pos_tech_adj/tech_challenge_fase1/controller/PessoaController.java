@@ -23,7 +23,7 @@ public class PessoaController {
 
     @GetMapping
     public ResponseEntity<Page<PessoaDTO>> findAll(
-            @PageableDefault(size = 10, page = 0, sort = "idPessoa")Pageable pageable
+            @PageableDefault(size = 10, page = 0, sort = "id")Pageable pageable
     ) {
         Page<PessoaDTO> pessoaDTOS = pessoaService.findAll(pageable);
         return ResponseEntity.ok(pessoaDTOS);

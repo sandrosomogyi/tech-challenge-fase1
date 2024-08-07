@@ -23,7 +23,7 @@ public class ColaboradorController {
 
     @GetMapping
     public ResponseEntity<Page<ColaboradorDTO>> findAll(
-            @PageableDefault(size = 10, page = 0, sort = "idColaborador")Pageable pageable
+            @PageableDefault(size = 10, page = 0, sort = "id")Pageable pageable
     ) {
         Page<ColaboradorDTO> colaboradorDTOS = colaboradorService.findAll(pageable);
         return ResponseEntity.ok(colaboradorDTOS);
