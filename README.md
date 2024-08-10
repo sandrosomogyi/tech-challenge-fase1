@@ -23,7 +23,7 @@ Melhor resolução: https://miro.com/app/board/uXjVK5Myikc=/?share_link_id=62562
 
 Material Disponível em: https://miro.com/app/board/uXjVK5Myikc=/?utm_source=notification&utm_medium=email&utm_campaign=daily-updates&utm_content=view-board-cta 
 
-
+Documentação PostMan: https://documenter.getpostman.com/view/29566921/2sA3kaAxmn
 
 
 
