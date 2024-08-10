@@ -20,6 +20,8 @@ FASE 4 - OUTROS ELEMENTOS
 FASE 5- AGREGADOS
 ![Event Storming - Quadro 5](https://github.com/user-attachments/assets/6f28e572-0549-41f9-87aa-733eed4cf7dc)
 
+Material Disponível em: https://miro.com/app/board/uXjVK5Myikc=/?utm_source=notification&utm_medium=email&utm_campaign=daily-updates&utm_content=view-board-cta 
+
 
 
 
